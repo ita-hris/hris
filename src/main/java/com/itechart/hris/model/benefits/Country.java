@@ -1,6 +1,7 @@
 package com.itechart.hris.model.benefits;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,9 @@ public class Country {
 
   private String name;
 
-  @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+  @OneToMany(
+      mappedBy = "country",
+      fetch = FetchType.LAZY,
+      cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
   private Set<Company> companies;
 }
