@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/benefits")
-@Api(value = "/benefits")
+@Api
 public class InitController {
 
     @ApiOperation(value = "Get API greeting")
