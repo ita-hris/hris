@@ -2,6 +2,7 @@ package com.itechart.hris.model.benefits;
 
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +27,6 @@ public class Company {
 
   private String address;
 
-  @OneToMany(mappedBy = "company")
+  @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
   private Set<Employee> employees;
 }
