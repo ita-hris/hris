@@ -1,0 +1,10 @@
+# logging level
+logging:
+  level:
+    com.itechart.hris: TRACE
+
+# CORS
+com.itechart.hris.cors:
+  allowed:
+    - 'http://localhost:9000'
+    - 'http://localhost:8081'
