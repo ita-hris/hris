@@ -22,6 +22,8 @@ public class Company {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  private String name;
+
   @ManyToOne
   @JoinColumn(name = "country_id")
   private Country country;
