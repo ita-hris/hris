@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
-    command: bash -c "./gradlew bootRun"
-    volumes:
-      - .:/hris
+    command: bash -c "gradle bootRun"
     ports:
       - '8080:8080'
