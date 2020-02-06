@@ -1,6 +1,7 @@
 package com.itechart.hris.service.benefits;
 
 import com.itechart.hris.model.benefits.Company;
+import com.itechart.hris.model.benefits.dto.CompanyDto;
 
 import java.util.List;
 
@@ -9,9 +10,11 @@ public interface CompanyService {
 
   List<Company> getAll();
 
-  Company create(Company company);
+  List<Company> getAllById(List<Long> companiesId);
 
-  Company update(Long companyId, Company updatedCompany);
+  Company create(CompanyDto dto);
+
+  Company update(Long companyId, CompanyDto updatedDto);
 
   void delete(Long companyId);
 }

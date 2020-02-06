@@ -1,6 +1,7 @@
 package com.itechart.hris.service.benefits;
 
 import com.itechart.hris.model.benefits.Department;
+import com.itechart.hris.model.benefits.dto.DepartmentDto;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ public interface DepartmentService {
 
   List<Department> getAll();
 
-  Department create(Department department);
+  Department create(DepartmentDto dto);
 
-  Department update(Long departmentId, Department updatedDepartment);
+  Department update(Long departmentId, DepartmentDto updatedDto);
 
   void delete(Long departmentId);
 }

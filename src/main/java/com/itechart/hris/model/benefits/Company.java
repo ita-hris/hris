@@ -1,6 +1,8 @@
 package com.itechart.hris.model.benefits;
 
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,11 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Company {
 
@@ -24,8 +32,11 @@ public class Company {
 
   private String name;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "country_id")
+  @JsonIgnoreProperties(
+      ignoreUnknown = true,
+      value = {"hibernateLazyInitializer", "handler", "companies"})
   private Country country;
 
   private String address;
@@ -34,5 +45,8 @@ public class Company {
       mappedBy = "company",
       fetch = FetchType.LAZY,
       cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-  private Set<Employee> employees;
+  @JsonIgnoreProperties(
+      ignoreUnknown = true,
+      value = {"hibernateLazyInitializer", "handler", "company"})
+  private List<Employee> employees;
 }

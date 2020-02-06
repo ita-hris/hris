@@ -1,9 +1,12 @@
 package com.itechart.hris.service.benefits.impl;
 
 import com.itechart.hris.model.benefits.Department;
+import com.itechart.hris.model.benefits.dto.DepartmentDto;
 import com.itechart.hris.repository.benefits.DepartmentRepository;
 import com.itechart.hris.service.benefits.DepartmentService;
+import com.itechart.hris.service.benefits.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +14,14 @@ import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-  private DepartmentRepository repository;
+  private final DepartmentRepository repository;
+  private final EmployeeService employeeService;
 
   @Autowired
-  public DepartmentServiceImpl(DepartmentRepository repository) {
+  public DepartmentServiceImpl(
+      DepartmentRepository repository, @Lazy EmployeeService employeeService) {
     this.repository = repository;
+    this.employeeService = employeeService;
   }
 
   @Override
@@ -31,14 +37,15 @@ public class DepartmentServiceImpl implements DepartmentService {
   }
 
   @Override
-  public Department create(Department department) {
-    return repository.save(department);
+  public Department create(DepartmentDto dto) {
+    return repository.save(toDepartment(dto));
   }
 
   @Override
-  public Department update(Long departmentId, Department updatedDepartment) {
+  public Department update(Long departmentId, DepartmentDto updatedDto) {
     Optional<Department> optionalDepartment = repository.findById(departmentId);
     if (optionalDepartment.isPresent()) {
+      Department updatedDepartment = toDepartment(updatedDto);
       updatedDepartment.setId(departmentId);
       return repository.save(updatedDepartment);
     } else {
@@ -52,5 +59,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     // TODO throw new ElementNotFoundException() if department is null;
     Department department = repository.findById(departmentId).orElse(null);
     repository.delete(department);
+  }
+
+  private Department toDepartment(DepartmentDto dto) {
+    return Department.builder()
+        .name(dto.getName())
+        .employees(employeeService.getAllById(dto.getEmployeesId()))
+        .build();
   }
 }

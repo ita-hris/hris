@@ -1,6 +1,7 @@
 package com.itechart.hris.service.benefits;
 
 import com.itechart.hris.model.benefits.Employee;
+import com.itechart.hris.model.benefits.dto.EmployeeDto;
 
 import java.util.List;
 
@@ -9,9 +10,11 @@ public interface EmployeeService {
 
   List<Employee> getAll();
 
-  Employee create(Employee employee);
+  List<Employee> getAllById(List<Long> employeesId);
 
-  Employee update(Long employeeId, Employee updatedEmployee);
+  Employee create(EmployeeDto dto);
+
+  Employee update(Long employeeId, EmployeeDto updatedDto);
 
   void delete(Long employeeId);
 }

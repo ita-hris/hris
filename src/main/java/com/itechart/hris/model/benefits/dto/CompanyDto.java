@@ -9,10 +9,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CountryDto {
+@Builder
+public class CompanyDto {
   private String name;
-  private List<Long> companiesId;
+  private Long countryId;
+  private String address;
+  private List<Long> employeesId;
 }

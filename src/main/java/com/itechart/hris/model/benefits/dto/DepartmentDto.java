@@ -12,7 +12,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CountryDto {
+public class DepartmentDto {
   private String name;
-  private List<Long> companiesId;
+  private List<Long> employeesId;
 }
