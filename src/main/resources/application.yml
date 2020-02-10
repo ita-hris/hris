@@ -8,3 +8,13 @@ com.itechart.hris.cors:
   allowed:
     - 'http://localhost:9000'
     - 'http://localhost:8081'
+
+# H2
+spring:
+  datasource:
+    url: jdbc:h2:mem:benefits
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+#  jpa:
+#    database: org.hibernate.dialect.H2Dialect

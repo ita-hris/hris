@@ -5,7 +5,7 @@ import com.itechart.hris.model.benefits.dto.CompanyDto;
 import com.itechart.hris.repository.benefits.CompanyRepository;
 import com.itechart.hris.service.benefits.CompanyService;
 import com.itechart.hris.service.benefits.CountryService;
-import com.itechart.hris.service.benefits.EmployeeService;
+import com.itechart.hris.service.benefits.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -17,16 +17,16 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
   private final CompanyRepository repository;
   private final CountryService countryService;
-  private final EmployeeService employeeService;
+  private final DepartmentService departmentService;
 
   @Autowired
   public CompanyServiceImpl(
       CompanyRepository repository,
       @Lazy CountryService countryService,
-      @Lazy EmployeeService employeeService) {
+      @Lazy DepartmentService departmentService) {
     this.repository = repository;
     this.countryService = countryService;
-    this.employeeService = employeeService;
+    this.departmentService = departmentService;
   }
 
   @Override
@@ -76,7 +76,7 @@ public class CompanyServiceImpl implements CompanyService {
         .name(dto.getName())
         .address(dto.getAddress())
         .country(countryService.getById(dto.getCountryId()))
-        .employees(employeeService.getAllById(dto.getEmployeesId()))
+        .departments(departmentService.getAllById(dto.getDepartmentsId()))
         .build();
   }
 }

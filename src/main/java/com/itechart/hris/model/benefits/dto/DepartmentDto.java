@@ -14,5 +14,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DepartmentDto {
   private String name;
+  private Long companyId;
   private List<Long> employeesId;
 }

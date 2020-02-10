@@ -50,5 +50,5 @@ public class Company {
   @JsonIgnoreProperties(
       ignoreUnknown = true,
       value = {"hibernateLazyInitializer", "handler", "company"})
-  private List<Employee> employees;
+  private List<Department> departments;
 }

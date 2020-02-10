@@ -16,5 +16,5 @@ public class CompanyDto {
   private String name;
   private Long countryId;
   private String address;
-  private List<Long> employeesId;
+  private List<Long> departmentsId;
 }

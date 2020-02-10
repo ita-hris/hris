@@ -3,7 +3,6 @@ package com.itechart.hris.service.benefits.impl;
 import com.itechart.hris.model.benefits.Employee;
 import com.itechart.hris.model.benefits.dto.EmployeeDto;
 import com.itechart.hris.repository.benefits.EmployeeRepository;
-import com.itechart.hris.service.benefits.CompanyService;
 import com.itechart.hris.service.benefits.DepartmentService;
 import com.itechart.hris.service.benefits.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +16,12 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
   private final EmployeeRepository repository;
   private final DepartmentService departmentService;
-  private final CompanyService companyService;
 
   @Autowired
   public EmployeeServiceImpl(
-      EmployeeRepository repository,
-      @Lazy DepartmentService departmentService,
-      @Lazy CompanyService companyService) {
+      EmployeeRepository repository, @Lazy DepartmentService departmentService) {
     this.repository = repository;
     this.departmentService = departmentService;
-    this.companyService = companyService;
   }
 
   @Override
@@ -76,7 +71,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         .firstName(dto.getFirstName())
         .lastName(dto.getLastName())
         .department(departmentService.getById(dto.getDepartmentId()))
-        .company(companyService.getById(dto.getCompanyId()))
         .build();
   }
 }

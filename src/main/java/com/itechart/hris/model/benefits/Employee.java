@@ -39,11 +39,4 @@ public class Employee {
       ignoreUnknown = true,
       value = {"hibernateLazyInitializer", "handler", "employees"})
   private Department department;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "company_id")
-  @JsonIgnoreProperties(
-      ignoreUnknown = true,
-      value = {"hibernateLazyInitializer", "handler", "employees"})
-  private Company company;
 }

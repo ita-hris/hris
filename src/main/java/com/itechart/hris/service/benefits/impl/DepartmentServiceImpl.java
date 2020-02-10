@@ -3,6 +3,7 @@ package com.itechart.hris.service.benefits.impl;
 import com.itechart.hris.model.benefits.Department;
 import com.itechart.hris.model.benefits.dto.DepartmentDto;
 import com.itechart.hris.repository.benefits.DepartmentRepository;
+import com.itechart.hris.service.benefits.CompanyService;
 import com.itechart.hris.service.benefits.DepartmentService;
 import com.itechart.hris.service.benefits.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,16 @@ import java.util.Optional;
 public class DepartmentServiceImpl implements DepartmentService {
   private final DepartmentRepository repository;
   private final EmployeeService employeeService;
+  private final CompanyService companyService;
 
   @Autowired
   public DepartmentServiceImpl(
-      DepartmentRepository repository, @Lazy EmployeeService employeeService) {
+      DepartmentRepository repository,
+      @Lazy EmployeeService employeeService,
+      @Lazy CompanyService companyService) {
     this.repository = repository;
     this.employeeService = employeeService;
+    this.companyService = companyService;
   }
 
   @Override
@@ -34,6 +39,11 @@ public class DepartmentServiceImpl implements DepartmentService {
   @Override
   public List<Department> getAll() {
     return repository.findAll();
+  }
+
+  @Override
+  public List<Department> getAllById(List<Long> departmentsId) {
+    return repository.findAllById(departmentsId);
   }
 
   @Override
@@ -65,6 +75,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     return Department.builder()
         .name(dto.getName())
         .employees(employeeService.getAllById(dto.getEmployeesId()))
+        .company(companyService.getById(dto.getCompanyId()))
         .build();
   }
 }

@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +33,13 @@ public class Department {
   private Long id;
 
   private String name;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "company_id")
+  @JsonIgnoreProperties(
+      ignoreUnknown = true,
+      value = {"hibernateLazyInitializer", "handler", "departments"})
+  private Company company;
 
   @OneToMany(
       mappedBy = "department",
